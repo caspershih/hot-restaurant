@@ -58,21 +58,16 @@ app.post("/api/new", function (req, res) {
 });
 
 // Retrive Reservation JSON
-app.get("/api/reservations", function (req, res) {
-
-	if (reservations.length === 0) {
-		return res.json([]);
-	}
-	else {
-
-		return res.json({
-			reservations: reservations,
-			waiting: waitingList
-		})
-
-	}
-
-})
+app.get("/api/reservations", function(req, res) {
+  if (reservations.length === 0) {
+    return res.json([]);
+  } else {
+    return res.json({
+      reservations: reservations,
+      waiting: waitingList
+    });
+  }
+});
 
 // Serve HTML pages
 app.get(/\/(([\w]+)\.html)$/, function (req, res, next) {
