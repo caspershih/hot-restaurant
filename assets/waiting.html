@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    <title>Waiting</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Hot Restaurant</h1>
+                <p class="lead">Please make your reservation here.</p>
+                <a href="/table.html" class="btn btn-primary">View Tables</a>
+                <a href="/home.html" class="btn btn-primary">Home</a>
+            </div>
+
+        </div>
+
+        <form action="#">
+            <div class="form-group">
+                <label for="formGroupExampleInput">Your Name</label>
+                <input id="txtName" type="text" class="form-control" id="formGroupExampleInput" placeholder="ex. John Smith">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Your Phone Number</label>
+                <input id="txtPhone" type="text" class="form-control" id="formGroupExampleInput2" placeholder=" ex. 123-456-3341">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Your Email</label>
+                <input id="txtEmail" type="text" class="form-control" id="formGroupExampleInput2" placeholder="ex. jsmith@example.com">
+            </div>
+            <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script>
+        $("#btnSubmit").on("click", function(ev) {
+            var data = {
+                name: $("#txtName").val().trim(),
+                phone: $("#txtPhone").val().trim(),
+                email: $("#txtEmail").val().trim()
+            };
+            // console.log(data);
+            $.post("/api/new", data, function (res) {
+                alert(res.message);
+                $("#txtName").val("");
+                $("#txtPhone").val("");
+                $("#txtEmail").val("");
+                
+                $("#txtName").focus();
+            });
+        });
+    </script>
+</body>
+
+</html>
