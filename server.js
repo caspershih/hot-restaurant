@@ -56,7 +56,7 @@ app.get(/\/(([\w]+)\.(html|css))$/, function(req, res, next) {
   res.sendFile(
     fileName,
     {
-      root: __dirname + "/assests/",
+      root: __dirname + "/assets/",
       dotfiles: "deny",
       headers: {
         "x-timestamp": Date.now(),
