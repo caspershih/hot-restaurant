@@ -41,8 +41,26 @@ app.use(parser.json());
 // Retrive Reservation JSON
 
 // Serve HTML pages
-app.get(/\/([\w]+)\.html$/, function(req, res) {
-  res.json(JSON.stringify(req));
+app.get(/\/(([\w]+)\.html)$/, function(req, res, next) {
+  const fileName = req.params[0];
+  res.sendFile(
+    fileName,
+    {
+      root: __dirname + "/",
+      dotfiles: "deny",
+      headers: {
+        "x-timestamp": Date.now(),
+        "x-sent": true
+      }
+    },
+    function(err) {
+      if (err) {
+        next(err);
+      } else {
+        console.log("Sent:", fileName);
+      }
+    }
+  );
 });
 
 /* End Workspace */
