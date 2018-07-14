@@ -54,7 +54,7 @@ app.get("/api/reservations", function(req, res) {
 
 }
 
-
+})
 
 // Serve HTML pages
 app.get(/\/(([\w]+)\.html)$/, function(req, res, next) {
