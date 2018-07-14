@@ -37,6 +37,32 @@ app.use(parser.json());
 /* Start Workspace */
 
 // New Reservation Handling
+app.post("/api/new", function(req, res){
+	var newTable = req.body;
+
+    var doWeNeedToDoSomethingElse = true;
+    for(i = 0; i < tables.length; i++){
+        if (tables.status === false){
+			reservations.push(res.json(newTable));
+            table.status = true
+            doWeNeedToDoSomethingElse = false;
+            break;
+        }
+    }
+
+    if (doWeNeedToDoSomethingElse) {
+		waitingList.push(res.json(newTable))
+		console.log("You have been added to the waiting list!")
+		doWeNeedToDoSomethingElse = true;
+}
+
+    
+
+    res.json({message: "Added Reservation"})
+    res.json({message: "Sorry but you have been added to the waiting list"})
+    res.json(newTable);
+
+});
 
 
 // Retrive Reservation JSON
