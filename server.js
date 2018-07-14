@@ -51,12 +51,12 @@ app.get("/api/reservations", function(req, res) {
 });
 
 // Serve HTML pages
-app.get(/\/(([\w]+)\.html)$/, function(req, res, next) {
+app.get(/\/(([\w]+)\.(html|css))$/, function(req, res, next) {
   const fileName = req.params[0];
   res.sendFile(
     fileName,
     {
-      root: __dirname + "/",
+      root: __dirname + "/assests/",
       dotfiles: "deny",
       headers: {
         "x-timestamp": Date.now(),
