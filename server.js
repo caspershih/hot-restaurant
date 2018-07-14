@@ -6,26 +6,26 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const tables = [
-  {
-    tableNo: 1,
-    status: true
-  },
-  {
-    tableNo: 2,
-    status: false
-  },
-  {
-    tableNo: 3,
-    status: false
-  },
-  {
-    tableNo: 4,
-    status: false
-  },
-  {
-    tableNo: 5,
-    status: false
-  }
+	{
+		tableNo: 1,
+		status: false
+	},
+	{
+		tableNo: 2,
+		status: false
+	},
+	{
+		tableNo: 3,
+		status: false
+	},
+	{
+		tableNo: 4,
+		status: false
+	},
+	{
+		tableNo: 5,
+		status: false
+	}
 ];
 
 const reservations = [];
@@ -37,6 +37,25 @@ app.use(parser.json());
 /* Start Workspace */
 
 // New Reservation Handling
+app.post("/api/new", function (req, res) {
+	var newTable = req.body;
+
+	var control = true;
+	for (i = 0; i < tables.length; i++) {
+		if (tables[i].status === false) {
+
+			reservations.push(newTable);
+			tables[i].status = true;
+			control = false;
+			res.json({ message: "Added Reservation", data: tables });
+			break;
+		}
+	}
+	if (control) {
+		waitingList.push(newTable)
+		res.json({ message: "Sorry but you have been added to the waiting list", data: tables })
+	}
+});
 
 // Retrive Reservation JSON
 app.get("/api/reservations", function(req, res) {
@@ -74,6 +93,6 @@ app.get(/\/(([\w]+)\.(html|css))$/, function(req, res, next) {
 });
 
 /* End Workspace */
-app.listen(PORT, function() {
-  console.log(`http://localhost:${PORT}`);
+app.listen(PORT, function () {
+	console.log(`http://localhost:${PORT}`);
 });
