@@ -6,26 +6,26 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const tables = [
-	{
-		tableNo: 1,
-		status: true
-	},
-	{
-		tableNo: 2,
-		status: false
-	},
-	{
-		tableNo: 3,
-		status: false
-	},
-	{
-		tableNo: 4,
-		status: false
-	},
-	{
-		tableNo: 5,
-		status: false
-	}
+  {
+    tableNo: 1,
+    status: true
+  },
+  {
+    tableNo: 2,
+    status: false
+  },
+  {
+    tableNo: 3,
+    status: false
+  },
+  {
+    tableNo: 4,
+    status: false
+  },
+  {
+    tableNo: 5,
+    status: false
+  }
 ];
 
 const reservations = [];
@@ -38,14 +38,14 @@ app.use(parser.json());
 
 // New Reservation Handling
 
-
 // Retrive Reservation JSON
 
-
 // Serve HTML pages
-
+app.get(/\/([\w]+)\.html$/, function(req, res) {
+  res.json(JSON.stringify(req));
+});
 
 /* End Workspace */
 app.listen(PORT, function() {
-	console.log(`http://localhost:${PORT}`);
+  console.log(`http://localhost:${PORT}`);
 });
